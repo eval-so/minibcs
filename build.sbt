@@ -11,6 +11,8 @@ scalacOptions ++= Seq(
 resolvers += "Typesafe Repository" at "http://repo.typesafe.com/typesafe/releases/"
 
 libraryDependencies ++= Seq(
+  "com.typesafe.akka" % "akka-actor" % "2.0.3",
+  "com.typesafe.akka" % "akka-remote" % "2.0.3",
   "org.joda" % "joda-convert" % "1.2",
   "joda-time" % "joda-time" % "2.1"
 )
