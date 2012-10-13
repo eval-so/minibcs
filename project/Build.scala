@@ -15,7 +15,11 @@ object MiniBCSBuild extends Build {
       "org.joda" % "joda-convert" % "1.2",
       "joda-time" % "joda-time" % "2.1"
     ),
-    version := "1.0.0"
+    version := "1.0.0",
+    scalacOptions ++= Seq(
+      "-deprecation",
+      "-feature"
+    )
   )
 
   lazy val root = Project(

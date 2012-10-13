@@ -16,7 +16,13 @@
 
 package org.breakpoint_eval.minibcs
 import akka.actor._
+import akka.pattern.ask
 import akka.event.Logging
+import language.postfixOps
+import scala.concurrent.ExecutionContext
+import ExecutionContext.Implicits.global
+
+import scala.concurrent.util.duration._
 import org.breakpoint_eval.common._
 
 class BCS extends Actor {
@@ -57,4 +63,14 @@ object Daemon extends App {
   val myActor = system.actorOf(
     Props[BCS].withDispatcher("bcs-dispatcher"),
     name = "bcs01")
+
+  val x = myActor.ask(BreakpointEvaluation.Request(
+    "php",
+    "<?php echo 'hi';",
+    "x86_64",
+    simulate = Some("timeout")))(5 seconds)
+
+  x onSuccess {
+    case _ => println("HAI")
+  }
 }
