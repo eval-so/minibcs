@@ -15,6 +15,18 @@
   */
 
 package org.breakpoint_eval.minibcs
+import akka.actor.{Actor, Props}
+import akka.event.Logging
+import org.breakpoint_eval.common._
+
+class BCS extends Actor {
+  val log = Logging(context.system, this)
+  def receive = {
+    case BreakpointEvaluation.Request(language, code) =>
+      println("hi")
+    case _ => println("bar")
+  }
+}
 
 object Daemon extends App {
   println("I am daemon, hear me daem.")
