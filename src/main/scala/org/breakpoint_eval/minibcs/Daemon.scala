@@ -15,19 +15,46 @@
   */
 
 package org.breakpoint_eval.minibcs
-import akka.actor.{Actor, Props}
+import akka.actor._
 import akka.event.Logging
 import org.breakpoint_eval.common._
 
 class BCS extends Actor {
   val log = Logging(context.system, this)
   def receive = {
-    case BreakpointEvaluation.Request(language, code) =>
-      println("hi")
+    case BreakpointEvaluation.Request(
+      language,
+      code,
+      arch,
+      compilerFlags,
+      runtimeFlags,
+      stdin,
+      simulate
+    ) => {
+      log.info("received a BE.Request")
+      simulate match {
+        case Some("timeout") => sender ! BreakpointEvaluation.Response(
+          5.00,
+          None,
+          Map(
+            'stdout -> "foobar",
+            'stderr -> ""
+          ),
+          None,
+          Some("A timeout occurred.")
+        )
+        case None => // Handle it like a production request.
+          case _ => // Other cases.
+      }
+    }
     case _ => println("bar")
   }
 }
 
 object Daemon extends App {
   println("I am daemon, hear me daem.")
+  val system = ActorSystem("daemon")
+  val myActor = system.actorOf(
+    Props[BCS].withDispatcher("bcs-dispatcher"),
+    name = "bcs01")
 }
