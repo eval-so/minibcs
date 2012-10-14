@@ -58,7 +58,6 @@ class BCS extends Actor {
 }
 
 object Daemon extends App {
-  println("I am daemon, hear me daem.")
   val system = ActorSystem("daemon")
   val myActor = system.actorOf(
     Props[BCS].withDispatcher("bcs-dispatcher"),
