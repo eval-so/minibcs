@@ -1,4 +1,5 @@
 package gd.eval.languages
+import gd.eval.SandboxedLanguage
 
 import scala.concurrent.Future
 import scala.concurrent.ExecutionContext.Implicits.global
