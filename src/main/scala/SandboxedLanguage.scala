@@ -10,7 +10,7 @@ trait SandboxedLanguage {
   val stdout = new StringBuilder
   val stderr = new StringBuilder
 
-  val logger = ProcessLogger(
+  private val logger = ProcessLogger(
     out => stdout.append(out),
     err => stderr.append(err))
 
