@@ -8,3 +8,11 @@ scalacOptions ++= Seq(
   "-deprecation",
   "-feature"
 )
+
+site.settings
+
+ghpages.settings
+
+git.remoteRepo := "git@github.com:breakpoint-eval/minibcs.git"
+
+site.includeScaladoc()
