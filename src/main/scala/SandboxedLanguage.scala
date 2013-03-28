@@ -7,15 +7,12 @@ import scala.sys.process._
 import java.io.{BufferedWriter, File, FileWriter}
 
 trait SandboxedLanguage {
-  val stdout = new StringBuilder
-  val stderr = new StringBuilder
+  private val stdout = new StringBuilder
+  private val stderr = new StringBuilder
 
   private val logger = ProcessLogger(
     out => stdout.append(out),
     err => stderr.append(err))
-
-  /** Aliases that map to this language. */
-  val aliases: Option[List[String]] = None
 
   /** Other binaries that should be on the system to use this language. */
   val extraRequiredBinaries: Option[List[String]] = None
@@ -33,13 +30,13 @@ trait SandboxedLanguage {
     *
     * This is lazy because extension doesn't exist yet.
     */
-  lazy val file: File = new File(s"/tmp/home/${System.currentTimeMillis}/${System.currentTimeMillis}.${extension}")
+  protected lazy val file: File = new File(s"/tmp/home/${System.currentTimeMillis}/${System.currentTimeMillis}.${extension}")
 
   /** How do we run the code? */
   val command: Seq[String]
 
   /** How do we sandbox the eval? */
-  val sandboxCommand: Seq[String] = Seq(
+  private val sandboxCommand: Seq[String] = Seq(
     "timeout", timeout.toString, "sandbox", "-H", "/tmp/home", "-T",
     "/tmp/home/.tmp", "-t", "sandbox_x_t", "timeout", timeout.toString)
 
@@ -50,9 +47,36 @@ trait SandboxedLanguage {
     output.flush
   }
 
-  /** Evaluate the code. */
-  def evaluate() = Future {
-    writeCodeToFile()
-    (sandboxCommand ++ command) ! logger
-  }
+  /** Return a Boolean indicating whether or not SELinux is enforcing. */
+  private def isSELinuxEnforcing() = "getenforce".!!.trim == "Enforcing"
+
+  /** The result of an evaluation. */
+  case class Result(
+    stdout: String,
+    stderr: String,
+    wallTime: Long,
+    exitCode: Int
+  )
+
+  /** Evaluate the code.
+    *
+    * @return a Left[Throwable] if we hit an internal issue, such as SELinux being altered.
+    *         Otherwise, a Right[Future[SandboxedLanguage]].
+    */
+  def evaluate() =
+    if (isSELinuxEnforcing()) {
+      writeCodeToFile()
+      val startTime = System.currentTimeMillis
+      val exitCode = (sandboxCommand ++ command) ! logger
+      val wallTime = System.currentTimeMillis - startTime
+
+      val result = Result(
+        stdout.toString,
+        stderr.toString,
+        wallTime,
+        exitCode)
+      Right(result)
+    } else {
+      Left(new SecurityException("SELinux is not enforcing. Bailing out early."))
+    }
 }
