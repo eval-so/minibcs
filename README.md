@@ -1,14 +1,14 @@
 # minibcs
 
-The Breakpoint Compilation System.
+The Eval.gd Compilation System.
 
 # Hacking
 
 We use SBT extensively, and so we recommend having a fairly up to date version
 of it.
 
-This is the core of Breakpoint, so it's reasonable to expect that anyone who
-hacks on this a lot has a setup somewhat-similar to the Breakpoint setup. That
+This is the core of Eval.gd, so it's reasonable to expect that anyone who
+hacks on this a lot has a setup somewhat-similar to the production setup. That
 is, they have SELinux enforcing, they have the SELinux `sandbox` command, and
 they have interpreters for languages they'll be modifying/adding set up, for
 testing purposes.
