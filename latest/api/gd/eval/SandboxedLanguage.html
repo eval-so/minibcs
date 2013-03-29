@@ -29,9 +29,9 @@
         </head>
         <body class="type">
       <div id="definition">
-        <img src="../../lib/trait_big.png" />
+        <a href="SandboxedLanguage$.html" title="Go to companion"><img src="../../lib/trait_to_object_big.png" /></a>
         <p id="owner"><a href="../package.html" class="extype" name="gd">gd</a>.<a href="package.html" class="extype" name="gd.eval">eval</a></p>
-        <h1>SandboxedLanguage</h1>
+        <h1><a href="SandboxedLanguage$.html" title="Go to companion">SandboxedLanguage</a></h1>
       </div>
 
       <h4 id="signature" class="signature">
@@ -49,7 +49,7 @@
           <div class="superTypes hiddenContent"><span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
         </div><div class="toggleContainer block">
           <span class="toggle">Known Subclasses</span>
-          <div class="subClasses hiddenContent"><a href="languages/Ruby.html" class="extype" name="gd.eval.languages.Ruby">Ruby</a></div>
+          <div class="subClasses hiddenContent"><a href="languages/C.html" class="extype" name="gd.eval.languages.C">C</a>, <a href="languages/Python.html" class="extype" name="gd.eval.languages.Python">Python</a>, <a href="languages/Ruby.html" class="extype" name="gd.eval.languages.Ruby">Ruby</a>, <a href="languages/Scala.html" class="extype" name="gd.eval.languages.Scala">Scala</a></div>
         </div></div>
         
 
@@ -87,23 +87,7 @@
         <div id="allMembers">
         
 
-        <div id="types" class="types members">
-              <h3>Type Members</h3>
-              <ol><li name="gd.eval.SandboxedLanguage.Result" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="ResultextendsProductwithSerializable"></a>
-      <a id="Result:Result"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">case class</span>
-      </span>
-      <span class="symbol">
-        <a href="SandboxedLanguage$Result.html"><span class="name">Result</span></a><span class="params">(<span name="stdout">stdout: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="stderr">stderr: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="wallTime">wallTime: <span class="extype" name="scala.Long">Long</span></span>, <span name="exitCode">exitCode: <span class="extype" name="scala.Int">Int</span></span>)</span><span class="result"> extends <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
-      </span>
-      </h4>
-      <p class="comment cmt">The result of an evaluation.</p>
-    </li></ol>
-            </div>
+        
 
         <div id="values" class="values members">
               <h3>Abstract Value Members</h3>
@@ -245,6 +229,19 @@
                 <span class="name">@throws</span><span class="args">()</span>
               
         </dd></dl></div>
+    </li><li name="gd.eval.SandboxedLanguage#compileCommand" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="compileCommand:Option[Seq[String]]"></a>
+      <a id="compileCommand:Option[Seq[String]]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">compileCommand</span><span class="result">: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Seq">Seq</span>[<span class="extype" name="scala.Predef.String">String</span>]]</span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">How do we compile the code, if we need to?</p>
     </li><li name="scala.AnyRef#eq" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="eq(x$1:AnyRef):Boolean"></a>
       <a id="eq(AnyRef):Boolean"></a>
@@ -272,7 +269,7 @@
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
     </li><li name="gd.eval.SandboxedLanguage#evaluate" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="evaluate():ProductwithSerializablewithscala.util.Either[SecurityException,SandboxedLanguage.this.Result]"></a>
+      <a id="evaluate():ProductwithSerializablewithscala.util.Either[SecurityException,gd.eval.SandboxedLanguage.Result]"></a>
       <a id="evaluate():ProductwithSerializablewithEither[SecurityException,Result]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -280,7 +277,7 @@
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">evaluate</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span> with <span class="extype" name="scala.util.Either">Either</span>[<span class="extype" name="java.lang.SecurityException">SecurityException</span>, <a href="SandboxedLanguage$Result.html" class="extype" name="gd.eval.SandboxedLanguage.Result">Result</a>]</span>
+        <span class="name">evaluate</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span> with <span class="extype" name="scala.util.Either">Either</span>[<span class="extype" name="java.lang.SecurityException">SecurityException</span>, <a href="SandboxedLanguage$$Result.html" class="extype" name="gd.eval.SandboxedLanguage.Result">Result</a>]</span>
       </span>
       </h4>
       <p class="shortcomment cmt">Evaluate the code.</p><div class="fullcomment"><div class="comment cmt"><p>Evaluate the code.
@@ -300,20 +297,19 @@
       </span>
       </h4>
       <p class="shortcomment cmt">Other binaries that should be on the system to use this language.</p>
-    </li><li name="gd.eval.SandboxedLanguage#file" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="file:java.io.File"></a>
-      <a id="file:File"></a>
+    </li><li name="gd.eval.SandboxedLanguage#filename" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="filename:String"></a>
+      <a id="filename:String"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">lazy val</span>
       </span>
       <span class="symbol">
-        <span class="name">file</span><span class="result">: <span class="extype" name="java.io.File">File</span></span>
+        <span class="name">filename</span><span class="result">: <span class="extype" name="scala.Predef.String">String</span></span>
       </span>
       </h4>
-      <p class="shortcomment cmt">What file should we store the code in?</p><div class="fullcomment"><div class="comment cmt"><p>What file should we store the code in?</p><p>This is lazy because extension doesn't exist yet.
-</p></div><dl class="attributes block"> <dt>Attributes</dt><dd>protected </dd></dl></div>
+      <p class="shortcomment cmt">The code's filename.</p>
     </li><li name="scala.AnyRef#finalize" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="finalize():Unit"></a>
       <a id="finalize():Unit"></a>
@@ -356,6 +352,19 @@
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
+    </li><li name="gd.eval.SandboxedLanguage#home" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="home:java.io.File"></a>
+      <a id="home:File"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">home</span><span class="result">: <span class="extype" name="java.io.File">File</span></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">A home directory that is unique to this evaluation.</p>
     </li><li name="scala.Any#isInstanceOf" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="isInstanceOf[T0]:Boolean"></a>
       <a id="isInstanceOf[T0]:Boolean"></a>
@@ -434,6 +443,19 @@
       </span>
       </h4>
       <p class="shortcomment cmt">After how long, in seconds, should we kill the evaluation?</p>
+    </li><li name="gd.eval.SandboxedLanguage#tmp" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="tmp:java.io.File"></a>
+      <a id="tmp:File"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">tmp</span><span class="result">: <span class="extype" name="java.io.File">File</span></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">A /tmp mount for the sandbox (also available in its ~/.</p><div class="fullcomment"><div class="comment cmt"><p>A /tmp mount for the sandbox (also available in its ~/.tmp).</p></div></div>
     </li><li name="scala.AnyRef#toString" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="toString():String"></a>
       <a id="toString():String"></a>
