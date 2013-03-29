@@ -1,5 +1,7 @@
 package gd.eval
 
+import org.apache.commons.io.FileUtils
+
 import scala.concurrent.Future
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.sys.process._
@@ -47,6 +49,7 @@ trait SandboxedLanguage {
     "timeout", timeout.toString, "sandbox", "-H", home.toString, "-T",
     tmp.toString, "-t", "sandbox_x_t", "timeout", timeout.toString)
 
+  /** Put the given code in its source file. */
   private def writeCodeToFile() {
     tmp.mkdirs()
     val output = new BufferedWriter(new FileWriter(new File(s"${home}/${filename}")))
@@ -98,14 +101,12 @@ trait SandboxedLanguage {
   def evaluate() = {
     if (isSELinuxEnforcing()) {
       writeCodeToFile()
-
       val compilationResult = compileCommand match {
         case Some(command) => Some(runInSandbox(command))
         case _ => None
       }
-
       val result = runInSandbox(command, compilationResult)
-
+      FileUtils.deleteDirectory(home)
       Right(result)
     } else {
       Left(new SecurityException("SELinux is not enforcing. Bailing out early."))

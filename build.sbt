@@ -9,6 +9,8 @@ scalacOptions ++= Seq(
   "-feature"
 )
 
+libraryDependencies += "commons-io" % "commons-io" % "2.4"
+
 site.settings
 
 ghpages.settings
