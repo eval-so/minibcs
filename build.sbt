@@ -9,7 +9,10 @@ scalacOptions ++= Seq(
   "-feature"
 )
 
-libraryDependencies += "commons-io" % "commons-io" % "2.4"
+libraryDependencies ++= Seq(
+  "commons-io" % "commons-io" % "2.4",
+  "org.scalatest" % "scalatest_2.10" % "1.9.1" % "test"
+)
 
 site.settings
 

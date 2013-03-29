@@ -60,22 +60,13 @@ trait SandboxedLanguage {
   /** Return a Boolean indicating whether or not SELinux is enforcing. */
   private def isSELinuxEnforcing() = "getenforce".!!.trim == "Enforcing"
 
-  /** The result of an evaluation. */
-  case class Result(
-    stdout: String,
-    stderr: String,
-    wallTime: Long,
-    exitCode: Int,
-    compilationResult: Option[Result] = None
-  )
-
   /** Run a command in the Sandbox.
     *
     * @return A [[Result]] with the result.
     */
   private def runInSandbox(
     command: Seq[String],
-    compilationResult: Option[Result] = None) = {
+    compilationResult: Option[SandboxedLanguage.Result] = None) = {
       val stdout = new StringBuilder
       val stderr = new StringBuilder
       val logger = ProcessLogger(
@@ -84,7 +75,7 @@ trait SandboxedLanguage {
       val startTime = System.currentTimeMillis
       val exitCode = (sandboxCommand ++ command) ! logger
       val wallTime = System.currentTimeMillis - startTime
-      Result(
+      SandboxedLanguage.Result(
         stdout.toString,
         stderr.toString,
         wallTime,
@@ -112,4 +103,15 @@ trait SandboxedLanguage {
       Left(new SecurityException("SELinux is not enforcing. Bailing out early."))
     }
   }
+}
+
+object SandboxedLanguage {
+    /** The result of an evaluation. */
+  case class Result(
+    stdout: String,
+    stderr: String,
+    wallTime: Long,
+    exitCode: Int,
+    compilationResult: Option[Result] = None
+  )
 }

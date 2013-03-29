@@ -1,0 +1,49 @@
+package tests
+import gd.eval.Router
+import gd.eval.SandboxedLanguage.Result
+import org.scalatest.{BeforeAndAfter, FunSpec, Inside}
+import org.scalatest.matchers.ShouldMatchers
+
+class Ruby extends FunSpec with ShouldMatchers with Inside with BeforeAndAfter {
+
+  def setupSimpleRubyTest(code: String = "puts 1") = {
+    val rb = Router.route("ruby", code)
+    val evaluated = rb.evaluate
+    (rb, evaluated)
+  }
+
+  describe("The Ruby implementation") {
+    it("should be able to successfully evaluate Ruby") {
+      val (rb, evaluated) = setupSimpleRubyTest()
+      evaluated should be ('right)
+      val Right(result) = evaluated
+      inside(result) {
+        case Result(stdout, stderr, wallTime, exitCode, compilationResult) =>
+          stdout should be ("1")
+          // stderr should be ("")
+          wallTime should be < 1000L
+          exitCode should be (0)
+          compilationResult should be (None)
+      }
+    }
+
+    it("should clean up after itself") {
+      val (rb, evaluated) = setupSimpleRubyTest()
+      rb.home.exists should be (false)
+    }
+
+    it("should time out after 5 seconds") {
+      val (rb, evaluated) = setupSimpleRubyTest("puts 1; sleep 10")
+      val Right(result) = evaluated
+      inside(result) {
+        case Result(stdout, stderr, wallTime, exitCode, compilationResult) =>
+          stdout should be ("1")
+          // stderr should be ("")
+          wallTime should be > 4900L
+          wallTime should be < 5200L
+          exitCode should be (124)
+          compilationResult should be (None)
+      }
+    }
+  }
+}
