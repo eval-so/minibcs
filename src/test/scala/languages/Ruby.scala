@@ -1,15 +1,21 @@
 package tests
 import gd.eval.Router
 import gd.eval.SandboxedLanguage.Result
-import org.scalatest.{BeforeAndAfter, FunSpec, Inside}
+import org.scalatest.{BeforeAndAfter, FunSpec, Inside, ParallelTestExecution}
 import org.scalatest.matchers.ShouldMatchers
 
-class Ruby extends FunSpec with ShouldMatchers with Inside with BeforeAndAfter {
+class Ruby
+  extends FunSpec
+  with ShouldMatchers
+  with Inside
+  with BeforeAndAfter
+  with ParallelTestExecution {
 
   def setupSimpleRubyTest(code: String = "puts 1") = {
-    val rb = Router.route("ruby", code)
-    val evaluated = rb.evaluate
-    (rb, evaluated)
+    val rbOption = Router.route("ruby", code)
+    rbOption should not be (None)
+    val Some(rb) = rbOption
+    (rb, rb.evaluate)
   }
 
   describe("The Ruby implementation") {
