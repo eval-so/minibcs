@@ -69,9 +69,10 @@ trait SandboxedLanguage {
     compilationResult: Option[SandboxedLanguage.Result] = None) = {
       val stdout = new StringBuilder
       val stderr = new StringBuilder
+      val lineSeparator = sys.props.getOrElse("line.separator", "\n")
       val logger = ProcessLogger(
-        out => stdout.append(out + "\n"),
-        err => stderr.append(err + "\n"))
+        out => stdout.append(out + lineSeparator),
+        err => stderr.append(err + lineSeparator))
       val startTime = System.currentTimeMillis
       val exitCode = (sandboxCommand ++ command) ! logger
       val wallTime = System.currentTimeMillis - startTime
