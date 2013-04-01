@@ -70,8 +70,8 @@ trait SandboxedLanguage {
       val stdout = new StringBuilder
       val stderr = new StringBuilder
       val logger = ProcessLogger(
-        out => stdout.append(out),
-        err => stderr.append(err))
+        out => stdout.append(out + "\n"),
+        err => stderr.append(err + "\n"))
       val startTime = System.currentTimeMillis
       val exitCode = (sandboxCommand ++ command) ! logger
       val wallTime = System.currentTimeMillis - startTime
