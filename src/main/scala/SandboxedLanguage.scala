@@ -77,8 +77,8 @@ trait SandboxedLanguage {
       val exitCode = (sandboxCommand ++ command) ! logger
       val wallTime = System.currentTimeMillis - startTime
       SandboxedLanguage.Result(
-        stdout.toString.dropRight(lineSeparator.length),
-        stderr.toString.dropRight(lineSeparator.length),
+        stdout.toString,
+        stderr.toString,
         wallTime,
         exitCode,
         compilationResult)
