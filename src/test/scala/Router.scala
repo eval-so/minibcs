@@ -1,5 +1,5 @@
 package tests
-import gd.eval.Router
+import so.eval.Router
 import org.scalatest.{BeforeAndAfter, FunSpec, ParallelTestExecution}
 import org.scalatest.matchers.ShouldMatchers
 

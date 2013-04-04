@@ -1,4 +1,4 @@
-package gd.eval
+package so.eval
 
 import org.apache.commons.io.FileUtils
 

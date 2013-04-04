@@ -1,6 +1,6 @@
 package tests
-import gd.eval.Router
-import gd.eval.SandboxedLanguage.Result
+import so.eval.Router
+import so.eval.SandboxedLanguage.Result
 import org.scalatest.{BeforeAndAfter, FunSpec, Inside, ParallelTestExecution}
 import org.scalatest.matchers.ShouldMatchers
 

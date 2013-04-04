@@ -1,5 +1,5 @@
-package gd.eval.languages
-import gd.eval.SandboxedLanguage
+package so.eval.languages
+import so.eval.SandboxedLanguage
 
 case class Ruby(code: String) extends SandboxedLanguage {
   val extension = "rb"
