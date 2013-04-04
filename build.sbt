@@ -18,6 +18,6 @@ site.settings
 
 ghpages.settings
 
-git.remoteRepo := "git@github.com:eval-gd/minibcs.git"
+git.remoteRepo := "git@github.com:eval-so/minibcs.git"
 
 site.includeScaladoc()
