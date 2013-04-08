@@ -5,6 +5,7 @@ object Router {
   /* The list of languages we can evaluate. Keep alphabetical. */
   val languages = Map(
     "c" -> C,
+    "python" -> Python,
     "ruby" -> Ruby,
     "scala" -> Scala
   )
