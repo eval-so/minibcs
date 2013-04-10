@@ -25,7 +25,7 @@ class Ruby
       val Right(result) = evaluated
       inside(result) {
         case Result(stdout, stderr, wallTime, exitCode, compilationResult) =>
-          stdout should be ("1")
+          stdout should be ("1\n")
           // stderr should be ("")
           wallTime should be < 1000L
           exitCode should be (0)
@@ -43,10 +43,10 @@ class Ruby
       val Right(result) = evaluated
       inside(result) {
         case Result(stdout, stderr, wallTime, exitCode, compilationResult) =>
-          stdout should be ("1")
+          stdout should be ("1\n")
           // stderr should be ("")
           wallTime should be > 4900L
-          wallTime should be < 5200L
+          wallTime should be < 5500L
           exitCode should be (124)
           compilationResult should be (None)
       }
