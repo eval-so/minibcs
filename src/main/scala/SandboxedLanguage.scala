@@ -88,7 +88,7 @@ trait SandboxedLanguage {
   /** Evaluate the code.
     *
     * @return a Left[Throwable] if we hit an internal issue, such as SELinux being altered.
-    *         Otherwise, a Right[Future[SandboxedLanguage]].
+    *         Otherwise, a Right[Result].
     */
   def evaluate() = {
     if (isSELinuxEnforcing()) {
