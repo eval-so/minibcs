@@ -24,7 +24,7 @@ trait SandboxedLanguage {
   val extension: String
 
   /** Source code of the program being evaluated. */
-  val code: String
+  val evaluation: EvaluationRequest
 
   /** After how long, in seconds, should we kill the evaluation? */
   val timeout: Int = 5
@@ -53,7 +53,7 @@ trait SandboxedLanguage {
   private def writeCodeToFile() {
     tmp.mkdirs()
     val output = new BufferedWriter(new FileWriter(new File(s"${home}/${filename}")))
-    output.write(code)
+    output.write(evaluation.code)
     output.flush
   }
 

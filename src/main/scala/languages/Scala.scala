@@ -1,7 +1,7 @@
 package so.eval.languages
-import so.eval.SandboxedLanguage
+import so.eval.{EvaluationRequest, SandboxedLanguage}
 
-case class Scala(code: String) extends SandboxedLanguage {
+case class Scala(evaluation: EvaluationRequest) extends SandboxedLanguage {
   val extension = "scala"
   override val compileCommand = Some(Seq("scalac", filename))
   val command = Seq("scala", "EvalSO")

@@ -1,7 +1,7 @@
 package so.eval.languages
-import so.eval.SandboxedLanguage
+import so.eval.{EvaluationRequest, SandboxedLanguage}
 
-case class Python(code: String) extends SandboxedLanguage {
+case class Python(evaluation: EvaluationRequest) extends SandboxedLanguage {
   val extension = "py"
   val command = Seq("python", filename)
 }

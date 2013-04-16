@@ -13,7 +13,7 @@ object Router {
     "scala" -> Scala
   )
 
-  def route(language: String, code: String) = languages.get(language).map(_(code))
+  def route(language: String, code: String) = languages.get(language).map(_(EvaluationRequest(code)))
 }
 
 class Router extends Actor {

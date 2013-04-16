@@ -1,7 +1,7 @@
 package so.eval.languages
-import so.eval.SandboxedLanguage
+import so.eval.{EvaluationRequest, SandboxedLanguage}
 
-case class Ruby(code: String) extends SandboxedLanguage {
+case class Ruby(evaluation: EvaluationRequest) extends SandboxedLanguage {
   val extension = "rb"
   val command = Seq("ruby", filename)
 }
