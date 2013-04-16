@@ -1,8 +1,11 @@
 package tests
 import so.eval.Router
 import so.eval.SandboxedLanguage.Result
+
 import org.scalatest.{BeforeAndAfter, FunSpec, Inside, ParallelTestExecution}
 import org.scalatest.matchers.ShouldMatchers
+
+import scala.util.{Failure, Try, Success}
 
 class Ruby
   extends FunSpec
@@ -21,8 +24,8 @@ class Ruby
   describe("The Ruby implementation") {
     it("should be able to successfully evaluate Ruby") {
       val (rb, evaluated) = setupSimpleRubyTest()
-      evaluated should be ('right)
-      val Right(result) = evaluated
+      evaluated should be ('success)
+      val Success(result) = evaluated
       inside(result) {
         case Result(stdout, stderr, wallTime, exitCode, compilationResult) =>
           stdout should be ("1\n")
@@ -40,7 +43,7 @@ class Ruby
 
     it("should time out after 5 seconds") {
       val (rb, evaluated) = setupSimpleRubyTest("puts 1; sleep 10")
-      val Right(result) = evaluated
+      val Success(result) = evaluated
       inside(result) {
         case Result(stdout, stderr, wallTime, exitCode, compilationResult) =>
           stdout should be ("1\n")

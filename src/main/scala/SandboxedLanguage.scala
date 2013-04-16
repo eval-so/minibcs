@@ -5,6 +5,7 @@ import org.apache.commons.io.FileUtils
 import scala.concurrent.Future
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.sys.process._
+import scala.util.{Failure, Try, Success}
 
 import java.io.{BufferedWriter, File, FileWriter}
 import java.nio.file.Files
@@ -85,11 +86,7 @@ trait SandboxedLanguage {
   }
 
 
-  /** Evaluate the code.
-    *
-    * @return a Left[Throwable] if we hit an internal issue, such as SELinux being altered.
-    *         Otherwise, a Right[Result].
-    */
+  /** Return a [[scala.util.Try[Result]]] after evaluating the code. */
   def evaluate() = {
     if (isSELinuxEnforcing()) {
       writeCodeToFile()
@@ -99,9 +96,9 @@ trait SandboxedLanguage {
       }
       val result = runInSandbox(command, compilationResult)
       FileUtils.deleteDirectory(home)
-      Right(result)
+      Try(result)
     } else {
-      Left(new SecurityException("SELinux is not enforcing. Bailing out early."))
+      Failure(new SecurityException("SELinux is not enforcing. Bailing out early."))
     }
   }
 }
