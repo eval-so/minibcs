@@ -29,9 +29,9 @@
         </head>
         <body class="value">
       <div id="definition">
-        <img src="../../lib/object_big.png" />
+        <a href="Router.html" title="Go to companion"><img src="../../lib/object_to_class_big.png" /></a>
         <p id="owner"><a href="../package.html" class="extype" name="so">so</a>.<a href="package.html" class="extype" name="so.eval">eval</a></p>
-        <h1>Router</h1>
+        <h1><a href="Router.html" title="Go to companion">Router</a></h1>
       </div>
 
       <h4 id="signature" class="signature">
@@ -266,15 +266,15 @@
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
     </li><li name="so.eval.Router#languages" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="languages:scala.collection.immutable.Map[String,scala.runtime.AbstractFunction1[String,ProductwithSerializablewithso.eval.SandboxedLanguage]]"></a>
-      <a id="languages:Map[String,AbstractFunction1[String,ProductwithSerializablewithSandboxedLanguage]]"></a>
+      <a id="languages:scala.collection.immutable.Map[String,scala.runtime.AbstractFunction1[so.eval.EvaluationRequest,ProductwithSerializablewithso.eval.SandboxedLanguage]]"></a>
+      <a id="languages:Map[String,AbstractFunction1[EvaluationRequest,ProductwithSerializablewithSandboxedLanguage]]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">val</span>
       </span>
       <span class="symbol">
-        <span class="name">languages</span><span class="result">: <span class="extype" name="scala.collection.immutable.Map">Map</span>[<span class="extype" name="java.lang.String">String</span>, <span class="extype" name="scala.runtime.AbstractFunction1">AbstractFunction1</span>[<span class="extype" name="java.lang.String">String</span>, <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span> with <a href="SandboxedLanguage.html" class="extype" name="so.eval.SandboxedLanguage">SandboxedLanguage</a>]]</span>
+        <span class="name">languages</span><span class="result">: <span class="extype" name="scala.collection.immutable.Map">Map</span>[<span class="extype" name="java.lang.String">String</span>, <span class="extype" name="scala.runtime.AbstractFunction1">AbstractFunction1</span>[<a href="EvaluationRequest.html" class="extype" name="so.eval.EvaluationRequest">EvaluationRequest</a>, <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span> with <a href="SandboxedLanguage.html" class="extype" name="so.eval.SandboxedLanguage">SandboxedLanguage</a>]]</span>
       </span>
       </h4>
       
@@ -317,6 +317,24 @@
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+    </li><li name="so.eval.Router#route" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="route(language:String,evaluation:so.eval.EvaluationRequest):Option[ProductwithSerializablewithso.eval.SandboxedLanguage]"></a>
+      <a id="route(String,EvaluationRequest):Option[ProductwithSerializablewithSandboxedLanguage]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">route</span><span class="params">(<span name="language">language: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="evaluation">evaluation: <a href="EvaluationRequest.html" class="extype" name="so.eval.EvaluationRequest">EvaluationRequest</a></span>)</span><span class="result">: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span> with <a href="SandboxedLanguage.html" class="extype" name="so.eval.SandboxedLanguage">SandboxedLanguage</a>]</span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Return a subclass of <a href="SandboxedLanguage.html" class="extype" name="so.eval.SandboxedLanguage">SandboxedLanguage</a>, configured to run an eval via Akka.</p><div class="fullcomment"><div class="comment cmt"><p>Return a subclass of <a href="SandboxedLanguage.html" class="extype" name="so.eval.SandboxedLanguage">SandboxedLanguage</a>, configured to run an eval via Akka.</p><p>Using this method, you can get an instance of a class that extends
+<a href="SandboxedLanguage.html" class="extype" name="so.eval.SandboxedLanguage">SandboxedLanguage</a>. This is useful to prepare a message to send to the
+<a href="Router.html" class="extype" name="so.eval.Router">Router</a> actor defined below.</p><p>All new clients implementing BCS should use this method as opposed to
+route[String, String](), even if they just call <code>.evaluate()</code> on the
+resulting class.
+</p></div></div>
     </li><li name="so.eval.Router#route" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="route(language:String,code:String):Option[ProductwithSerializablewithso.eval.SandboxedLanguage]"></a>
       <a id="route(String,String):Option[ProductwithSerializablewithSandboxedLanguage]"></a>
@@ -329,7 +347,7 @@
         <span class="name">route</span><span class="params">(<span name="language">language: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="code">code: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span> with <a href="SandboxedLanguage.html" class="extype" name="so.eval.SandboxedLanguage">SandboxedLanguage</a>]</span>
       </span>
       </h4>
-      
+      <p class="shortcomment cmt">LEGACY: Return a subclass of <a href="SandboxedLanguage.html" class="extype" name="so.eval.SandboxedLanguage">SandboxedLanguage</a>, configured to run an eval.</p>
     </li><li name="scala.AnyRef#synchronized" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="synchronized[T0](x$1:=&gt;T0):T0"></a>
       <a id="synchronized[T0](⇒T0):T0"></a>
