@@ -56,7 +56,7 @@ trait SandboxedLanguage {
     tmp.mkdirs()
     val output = new BufferedWriter(new FileWriter(new File(s"${home}/${filename}")))
     output.write(evaluation.code)
-    output.close
+    output.close()
   }
 
   /** Return a Boolean indicating whether or not SELinux is enforcing. */
