@@ -1,5 +1,6 @@
 package so.eval
 
+import org.apache.commons.codec.binary.Base64
 import org.apache.commons.io.FileUtils
 
 import scala.concurrent.Future
@@ -7,7 +8,7 @@ import scala.concurrent.ExecutionContext.Implicits.global
 import scala.sys.process._
 import scala.util.{Failure, Try, Success}
 
-import java.io.{BufferedWriter, File, FileWriter}
+import java.io.{BufferedOutputStream, BufferedWriter, File, FileOutputStream, FileWriter}
 import java.nio.file.Files
 
 trait SandboxedLanguage {
@@ -55,7 +56,7 @@ trait SandboxedLanguage {
     tmp.mkdirs()
     val output = new BufferedWriter(new FileWriter(new File(s"${home}/${filename}")))
     output.write(evaluation.code)
-    output.flush
+    output.close
   }
 
   /** Return a Boolean indicating whether or not SELinux is enforcing. */
@@ -90,6 +91,16 @@ trait SandboxedLanguage {
   def evaluate() = {
     if (isSELinuxEnforcing()) {
       writeCodeToFile()
+
+      evaluation.files match {
+        case Some(files) => files.foreach { case (filename, base64Contents) =>
+          val output = new BufferedOutputStream(new FileOutputStream(new File(s"${home}/${filename}")))
+          output.write(Base64.decodeBase64(base64Contents))
+          output.close()
+        }
+        case _ =>
+      }
+
       val compilationResult = compileCommand match {
         case Some(command) => Some(runInSandbox(command))
         case _ => None
