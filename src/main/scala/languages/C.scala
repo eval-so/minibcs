@@ -6,6 +6,6 @@ case class C(evaluation: EvaluationRequest) extends SandboxedLanguage {
   val allFiles = filename :: evaluation.files.map {
     _.keys.filter(f => f.endsWith(".c")).toList
   }.getOrElse(List())
-  override val compileCommand = Some(Seq("gcc", "-Wall", allFiles.mkString(" ")))
+  override val compileCommand = Some(Seq("gcc", "-Wall") ++ allFiles)
   val command = Seq("./a.out")
 }
