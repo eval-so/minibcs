@@ -89,7 +89,7 @@ trait SandboxedLanguage {
       }
 
       val base64OutputFiles = getOutputFiles().map { file =>
-        file.getPath.replace(s"${home}/output/", "") -> Base64.encodeBase64String(io.Source.fromFile(file).map(_.toByte).toArray)
+        file.getPath.replaceAll(s"^${home}/output/", "") -> Base64.encodeBase64String(io.Source.fromFile(file).map(_.toByte).toArray)
       }.toMap
 
       SandboxedLanguage.Result(
