@@ -98,7 +98,7 @@ trait SandboxedLanguage {
         wallTime,
         exitCode,
         compilationResult,
-        base64OutputFiles)
+        if (base64OutputFiles.isEmpty) None else Some(base64OutputFiles))
   }
 
 
@@ -137,6 +137,6 @@ object SandboxedLanguage {
     wallTime: Long,
     exitCode: Int,
     compilationResult: Option[Result] = None,
-    outputFiles: Map[String,String] = Map()
+    outputFiles: Option[Map[String,String]] = None
   )
 }

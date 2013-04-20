@@ -16,7 +16,7 @@ class Base64
       val res = Router.route(
         "ruby",
         "`echo 'foobar' > output/foo`; puts 123").get.evaluate
-      res.get.outputFiles.head._2 should be ("Zm9vYmFyCg==")
+      res.get.outputFiles.get.head._2 should be ("Zm9vYmFyCg==")
     }
 
     it("should decode input files correctly") {
