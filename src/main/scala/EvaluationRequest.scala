@@ -8,4 +8,5 @@ package so.eval
   */
 case class EvaluationRequest(
   code: String,
-  files: Option[Map[String, String]] = None)
+  files: Option[Map[String, String]] = None,
+  compilationOnly: Boolean = false)

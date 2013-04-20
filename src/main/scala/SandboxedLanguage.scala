@@ -120,9 +120,17 @@ trait SandboxedLanguage {
         case Some(command) => Some(runInSandbox(command))
         case _ => None
       }
-      val result = runInSandbox(command, compilationResult)
-      FileUtils.deleteDirectory(home)
-      Try(result)
+
+      if (evaluation.compilationOnly && compilationResult != None) {
+        FileUtils.deleteDirectory(home)
+
+        // Acceptable since we check for None above.
+        Try(compilationResult.get)
+      } else {
+        val result = runInSandbox(command, compilationResult)
+        FileUtils.deleteDirectory(home)
+        Try(result)
+      }
     } else {
       Failure(new SecurityException("SELinux is not enforcing. Bailing out early."))
     }

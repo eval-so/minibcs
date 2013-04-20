@@ -59,7 +59,9 @@ class Ruby
       val code = """puts File.read("foo.txt")"""
       val eval = Router.route(
         "ruby",
-        EvaluationRequest(code, Some(Map("foo.txt" -> "Zm9vYmFy"))))
+        EvaluationRequest(
+          code,
+          files = Some(Map("foo.txt" -> "Zm9vYmFy"))))
       val result = eval.get.evaluate
       result.get.stdout should be ("foobar\n")
     }
