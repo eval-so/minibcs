@@ -29,7 +29,7 @@ class `C++`
       evaluated should be ('success)
       val Success(result) = evaluated
       inside(result) {
-        case Result(stdout, stderr, wallTime, exitCode, compilationResult) =>
+        case Result(stdout, stderr, wallTime, exitCode, compilationResult, outputFiles) =>
           stdout should be ("hello\n")
           // stderr should be ("")
           wallTime should be < 1000L

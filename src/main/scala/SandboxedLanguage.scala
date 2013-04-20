@@ -37,6 +37,9 @@ trait SandboxedLanguage {
   /** A /tmp mount for the sandbox (also available in its ~/.tmp). */
   val tmp = new File(s"${home}/.tmp")
 
+  /** A place for evaluations to store things to ship back. */
+  val outputFilesDir = new File(s"${home}/output")
+
   /** The code's filename. */
   lazy val filename = s"${home.getName}.${extension}"
 
@@ -54,6 +57,7 @@ trait SandboxedLanguage {
   /** Put the given code in its source file. */
   private def writeCodeToFile() {
     tmp.mkdirs()
+    outputFilesDir.mkdirs()
     val output = new BufferedWriter(new FileWriter(new File(s"${home}/${filename}")))
     output.write(evaluation.code)
     output.close()
@@ -78,12 +82,23 @@ trait SandboxedLanguage {
       val startTime = System.currentTimeMillis
       val exitCode = (sandboxCommand ++ command) ! logger
       val wallTime = System.currentTimeMillis - startTime
+
+      def getOutputFiles(f: File = outputFilesDir): List[File] = {
+        val these = Option(f.listFiles)
+        these.map( f => (f ++ f.filter(_.isDirectory).flatMap(getOutputFiles)).filter(!_.isDirectory).toList ).getOrElse(List())
+      }
+
+      val base64OutputFiles = getOutputFiles().map { file =>
+        file.getPath -> Base64.encodeBase64String(io.Source.fromFile(file).map(_.toByte).toArray)
+      }.toMap
+
       SandboxedLanguage.Result(
         stdout.toString,
         stderr.toString,
         wallTime,
         exitCode,
-        compilationResult)
+        compilationResult,
+        base64OutputFiles)
   }
 
 
@@ -121,6 +136,7 @@ object SandboxedLanguage {
     stderr: String,
     wallTime: Long,
     exitCode: Int,
-    compilationResult: Option[Result] = None
+    compilationResult: Option[Result] = None,
+    outputFiles: Map[String,String] = Map()
   )
 }

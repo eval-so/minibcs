@@ -27,7 +27,7 @@ class Ruby
       evaluated should be ('success)
       val Success(result) = evaluated
       inside(result) {
-        case Result(stdout, stderr, wallTime, exitCode, compilationResult) =>
+        case Result(stdout, stderr, wallTime, exitCode, compilationResult, outputFiles) =>
           stdout should be ("1\n")
           // stderr should be ("")
           wallTime should be < 1000L
@@ -45,7 +45,7 @@ class Ruby
       val (rb, evaluated) = setupSimpleRubyTest("puts 1; sleep 10")
       val Success(result) = evaluated
       inside(result) {
-        case Result(stdout, stderr, wallTime, exitCode, compilationResult) =>
+        case Result(stdout, stderr, wallTime, exitCode, compilationResult, outputFiles) =>
           stdout should be ("1\n")
           // stderr should be ("")
           wallTime should be > 4900L
