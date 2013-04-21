@@ -17,6 +17,8 @@ libraryDependencies ++= Seq(
   "org.scalatest" % "scalatest_2.10" % "1.9.1" % "test"
 )
 
+testOptions in Test += Tests.Argument("-oDS")
+
 site.settings
 
 ghpages.settings
