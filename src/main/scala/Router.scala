@@ -9,6 +9,7 @@ object Router {
     "c" -> C,
     "c++" -> `C++`,
     "io" -> Io,
+    "java" -> Java,
     "python" -> Python,
     "ruby" -> Ruby,
     "scala" -> Scala
