@@ -9,4 +9,5 @@ package so.eval
 case class EvaluationRequest(
   code: String,
   files: Option[Map[String, String]] = None,
-  compilationOnly: Boolean = false)
+  compilationOnly: Boolean = false,
+  stdin: Option[String] = None)

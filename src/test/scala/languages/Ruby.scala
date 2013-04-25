@@ -65,5 +65,16 @@ class Ruby
       val result = eval.get.evaluate
       result.get.stdout should be ("foobar\n")
     }
+
+    it("should be able to handle stdin") {
+      val code = """puts STDIN.gets"""
+      val eval = Router.route(
+        "ruby",
+        EvaluationRequest(
+          code,
+          stdin = Some("testing")))
+      val result = eval.get.evaluate
+      result.get.stdout should be ("testing\n")
+    }
   }
 }

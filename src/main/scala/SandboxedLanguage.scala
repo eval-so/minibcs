@@ -8,7 +8,14 @@ import scala.concurrent.ExecutionContext.Implicits.global
 import scala.sys.process._
 import scala.util.{Failure, Try, Success}
 
-import java.io.{BufferedOutputStream, BufferedWriter, File, FileOutputStream, FileWriter}
+import java.io.{
+  BufferedOutputStream,
+  BufferedWriter,
+  ByteArrayInputStream,
+  File,
+  FileOutputStream,
+  FileWriter
+}
 import java.nio.file.Files
 
 trait SandboxedLanguage {
@@ -72,15 +79,17 @@ trait SandboxedLanguage {
     */
   private def runInSandbox(
     command: Seq[String],
-    compilationResult: Option[SandboxedLanguage.Result] = None) = {
+    compilationResult: Option[SandboxedLanguage.Result] = None,
+    stdin: Option[String] = None) = {
       val stdout = new StringBuilder
       val stderr = new StringBuilder
+      val stdinStream = new ByteArrayInputStream(stdin.getOrElse("").getBytes("UTF-8"))
       val lineSeparator = sys.props.getOrElse("line.separator", "\n")
       val logger = ProcessLogger(
         out => stdout.append(out + lineSeparator),
         err => stderr.append(err + lineSeparator))
       val startTime = System.currentTimeMillis
-      val exitCode = (sandboxCommand ++ command) ! logger
+      val exitCode = (sandboxCommand ++ command) #< stdinStream ! logger
       val wallTime = System.currentTimeMillis - startTime
 
       def getOutputFiles(f: File = outputFilesDir): List[File] = {
@@ -127,7 +136,7 @@ trait SandboxedLanguage {
         // Acceptable since we check for None above.
         Try(compilationResult.get)
       } else {
-        val result = runInSandbox(command, compilationResult)
+        val result = runInSandbox(command, compilationResult, stdin = evaluation.stdin)
         FileUtils.deleteDirectory(home)
         Try(result)
       }
