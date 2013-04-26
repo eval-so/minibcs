@@ -10,10 +10,10 @@ object Router {
     "c++" -> `C++`,
     "io" -> Io,
     "java" -> Java,
+    "php" -> PHP,
     "python" -> Python,
     "ruby" -> Ruby,
-    "scala" -> Scala,
-    "php" -> PHP
+    "scala" -> Scala
   )
 
   /** LEGACY: Return a subclass of [[SandboxedLanguage]], configured to run an eval. */
