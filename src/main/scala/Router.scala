@@ -12,7 +12,8 @@ object Router {
     "java" -> Java,
     "python" -> Python,
     "ruby" -> Ruby,
-    "scala" -> Scala
+    "scala" -> Scala,
+    "php" -> PHP
   )
 
   /** LEGACY: Return a subclass of [[SandboxedLanguage]], configured to run an eval. */
