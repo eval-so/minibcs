@@ -10,6 +10,7 @@ object Router {
     "c++" -> `C++`,
     "io" -> Io,
     "java" -> Java,
+    "perl" -> Perl,
     "php" -> PHP,
     "python" -> Python,
     "ruby" -> Ruby,
