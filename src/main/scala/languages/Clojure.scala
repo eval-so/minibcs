@@ -11,4 +11,5 @@ case class Clojure(evaluation: EvaluationRequest) extends SandboxedLanguage {
     "-Xbootclasspath/a:/usr/share/java/clojure.jar",
     "clojure.main",
     filename)
+  override val timeout = 10
 }
