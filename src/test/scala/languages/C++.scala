@@ -32,7 +32,10 @@ class `C++`
         "c++",
         EvaluationRequest("""#include <iostream>
                             |using namespace std;
-                            |int main() { cout << "hello" << endl; }""".stripMargin))
+                            |int main() {
+                            |  cout << "hello world!" << endl;
+                            |  cerr << "hi from stderr" << endl;
+                            |}""".stripMargin))
 
       evaluation should not be (None)
 
@@ -44,10 +47,41 @@ class `C++`
 
       inside(result) {
         case Result(stdout, stderr, wallTime, exitCode, compilationResult, outputFiles) =>
-          stdout.trim should be ("hello")
+          stdout.trim should be ("hello world!")
+          stderr.trim should be ("hi from stderr")
           wallTime should be < 1000L
           exitCode should be (0)
           compilationResult should not be (None)
+      }
+    }
+
+    it("should be able to run with compilationOnly set") {
+      val evaluation = Router.route(
+        "c++",
+        EvaluationRequest(
+          """#include <iostream>
+            |using namespace std;
+            |int main() {
+            |  cout << "hello world!" << endl;
+            |  cerr << "hi from stderr" << endl;
+            |}""".stripMargin,
+          compilationOnly = true))
+
+      evaluation should not be (None)
+
+      val future = router ? evaluation.get
+      val futureResult = Await.result(future, timeout.duration).asInstanceOf[Try[Result]]
+
+      futureResult should be ('success)
+      val Success(result) = futureResult
+
+      inside(result) {
+        case Result(stdout, stderr, wallTime, exitCode, compilationResult, outputFiles) =>
+          stdout.trim should be ("")
+          stderr.trim should be ("")
+          wallTime should be < 1000L
+          exitCode should be (0)
+          compilationResult should be (None)
       }
     }
   }
