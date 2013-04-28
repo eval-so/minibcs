@@ -13,7 +13,7 @@ import scala.concurrent.Await
 import scala.concurrent.duration._
 import scala.util.{Failure, Try, Success}
 
-class `C++`
+class `C`
   extends FunSpec
   with ShouldMatchers
   with Inside
@@ -26,16 +26,16 @@ class `C++`
   val system = ActorSystem("Evaluate")
   val router = system.actorOf(Props(new Router))
 
-  describe("The C++ implementation") {
-    it("should be able to successfully compile and run C++ code") {
-      val evaluation = Router.route(
-        "c++",
-        EvaluationRequest("""#include <iostream>
-                            |using namespace std;
-                            |int main() {
-                            |  cout << "hello world!" << endl;
-                            |  cerr << "hi from stderr" << endl;
-                            |}""".stripMargin))
+  val code = """#include <stdio.h>
+               |int main() {
+               |  printf("hello world!\n");
+               |  fprintf(stderr, "hi from stderr");
+               |  return 0;
+               |}""".stripMargin
+
+  describe("The C implementation") {
+    it("should be able to successfully compile and run C code") {
+      val evaluation = Router.route("c", EvaluationRequest(code))
 
       evaluation should not be (None)
 
@@ -55,37 +55,28 @@ class `C++`
       }
     }
 
-    it("should compile input files with .cxx and .cpp extensions") {
+    it("should compile multiple input files with .c extensions") {
       val evaluation = Router.route(
-        "c++",
+        "c",
         EvaluationRequest(
-          """#include <iostream>
-            |using namespace std;
-            |int main() {
-            |  cout << "hello world!" << endl;
-            |  cerr << "hi from stderr" << endl;
-            |}""".stripMargin,
-          files = Some(
-            Map(
-              "foo.cpp" -> "bar",
-              "baz.cxx" -> "buz"))))
+          code,
+            files = Some(
+              Map(
+                "foo.c" -> "bar",
+                "baz.c" -> "buz"))))
+
       evaluation should not be (None)
       val compileCommand = evaluation.get.compileCommand.get.mkString(" ")
-      compileCommand should include ("foo.cpp")
-      compileCommand should include ("baz.cxx")
+      compileCommand should include ("foo.c")
+      compileCommand should include ("baz.c")
       evaluation.get.deleteHomeDirectory()
     }
 
     it("should be able to run with compilationOnly set") {
       val evaluation = Router.route(
-        "c++",
+        "c",
         EvaluationRequest(
-          """#include <iostream>
-            |using namespace std;
-            |int main() {
-            |  cout << "hello world!" << endl;
-            |  cerr << "hi from stderr" << endl;
-            |}""".stripMargin,
+          code,
           compilationOnly = true))
 
       evaluation should not be (None)
