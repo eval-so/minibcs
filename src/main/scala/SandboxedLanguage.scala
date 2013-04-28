@@ -124,19 +124,26 @@ trait SandboxedLanguage {
       }
 
       if (evaluation.compilationOnly && compilationResult != None) {
-        FileUtils.deleteDirectory(home)
+        deleteHomeDirectory()
 
         // Acceptable since we check for None above.
         Try(compilationResult.get)
       } else {
         val result = runInSandbox(command, compilationResult, stdin = evaluation.stdin)
-        FileUtils.deleteDirectory(home)
+        deleteHomeDirectory()
         Try(result)
       }
     } else {
       Failure(new SecurityException("SELinux is not enforcing. Bailing out early."))
     }
   }
+
+  /** Delete the evaluation's home directory.
+    *
+    * This is intentionally public so that we can test without evaluating
+    * and not leave a bunch of eval-* tmpdirs around.
+    */
+  def deleteHomeDirectory() = FileUtils.deleteDirectory(home)
 }
 
 object SandboxedLanguage {

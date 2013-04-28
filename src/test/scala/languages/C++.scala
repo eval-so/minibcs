@@ -55,6 +55,27 @@ class `C++`
       }
     }
 
+    it("should compile input files with .cxx and .cpp extensions") {
+      val evaluation = Router.route(
+        "c++",
+        EvaluationRequest(
+          """#include <iostream>
+            |using namespace std;
+            |int main() {
+            |  cout << "hello world!" << endl;
+            |  cerr << "hi from stderr" << endl;
+            |}""".stripMargin,
+            files = Some(
+              Map(
+                "foo.cpp" -> "bar",
+                "baz.cxx" -> "buz"))))
+      evaluation should not be (None)
+      val compileCommand = evaluation.get.compileCommand.get.mkString(" ")
+      compileCommand should include ("foo.cpp")
+      compileCommand should include ("baz.cxx")
+      evaluation.get.deleteHomeDirectory()
+    }
+
     it("should be able to run with compilationOnly set") {
       val evaluation = Router.route(
         "c++",

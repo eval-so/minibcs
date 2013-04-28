@@ -11,12 +11,18 @@ class RouterSpec
 
   describe("The Router") {
     it("should be able to route using the legacy route method") {
-      Router.route("ruby", "puts 1") should not be (None)
+      val ruby = Router.route("ruby", "puts 1")
+      ruby should not be (None)
+      ruby.get.deleteHomeDirectory()
+
       Router.route("foobar", "foo bar") should be (None)
     }
 
     it("should be able to route using the new actor-style method") {
-      Router.route("ruby", EvaluationRequest("puts 1")) should not be (None)
+      val ruby = Router.route("ruby", EvaluationRequest("puts 1"))
+      ruby should not be (None)
+      ruby.get.deleteHomeDirectory()
+
       Router.route("foobar", EvaluationRequest("puts 1")) should be (None)
     }
 
