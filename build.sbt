@@ -26,3 +26,5 @@ ghpages.settings
 git.remoteRepo := "git@github.com:eval-so/minibcs.git"
 
 site.includeScaladoc()
+
+seq(ScctPlugin.instrumentSettings : _*)
