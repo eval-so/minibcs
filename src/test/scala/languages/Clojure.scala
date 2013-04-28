@@ -44,7 +44,7 @@ class Clojure
       inside(result) {
         case Result(stdout, stderr, wallTime, exitCode, compilationResult, outputFiles) =>
           stdout.trim should be ("hello world!")
-          wallTime should be < 4000L
+          wallTime should be < 5000L
           exitCode should be (0)
           compilationResult should be (None)
       }
