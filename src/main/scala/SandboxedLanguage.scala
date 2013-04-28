@@ -19,13 +19,6 @@ import java.io.{
 import java.nio.file.Files
 
 trait SandboxedLanguage {
-  private val stdout = new StringBuilder
-  private val stderr = new StringBuilder
-
-  private val logger = ProcessLogger(
-    out => stdout.append(out),
-    err => stderr.append(err))
-
   /** Other binaries that should be on the system to use this language. */
   val extraRequiredBinaries: Option[List[String]] = None
 
