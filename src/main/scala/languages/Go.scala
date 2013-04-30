@@ -7,5 +7,5 @@ case class Go(evaluation: EvaluationRequest) extends SandboxedLanguage {
     _.keys.filter(f => f.endsWith(".go")).toList
   }.getOrElse(List())
   override val compileCommand = Some(Seq("go", "build") ++ allFiles)
-  val command = Seq("./a.out")
+  val command = Seq(s"./${filename.replaceAll("\\.go$", "")}")
 }
