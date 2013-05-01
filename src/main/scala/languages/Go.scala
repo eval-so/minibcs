@@ -1,5 +1,5 @@
 package so.eval.languages
-import so.eval.{EvaluationRequest, SandboxedLanguage}
+import so.eval.{ EvaluationRequest, SandboxedLanguage }
 
 case class Go(evaluation: EvaluationRequest) extends SandboxedLanguage {
   val extension = "go"

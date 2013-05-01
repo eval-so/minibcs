@@ -6,7 +6,7 @@ import org.apache.commons.io.FileUtils
 import scala.concurrent.Future
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.sys.process._
-import scala.util.{Failure, Try, Success}
+import scala.util.{ Failure, Try, Success }
 
 import java.io.{
   BufferedOutputStream,
@@ -74,35 +74,34 @@ trait SandboxedLanguage {
     command: Seq[String],
     compilationResult: Option[SandboxedLanguage.Result] = None,
     stdin: Option[String] = None) = {
-      val stdout = new StringBuilder
-      val stderr = new StringBuilder
-      val stdinStream = new ByteArrayInputStream(stdin.getOrElse("").getBytes("UTF-8"))
-      val lineSeparator = sys.props.getOrElse("line.separator", "\n")
-      val logger = ProcessLogger(
-        out => stdout.append(out + lineSeparator),
-        err => stderr.append(err + lineSeparator))
-      val startTime = System.currentTimeMillis
-      val exitCode = (sandboxCommand ++ command) #< stdinStream ! logger
-      val wallTime = System.currentTimeMillis - startTime
+    val stdout = new StringBuilder
+    val stderr = new StringBuilder
+    val stdinStream = new ByteArrayInputStream(stdin.getOrElse("").getBytes("UTF-8"))
+    val lineSeparator = sys.props.getOrElse("line.separator", "\n")
+    val logger = ProcessLogger(
+      out => stdout.append(out + lineSeparator),
+      err => stderr.append(err + lineSeparator))
+    val startTime = System.currentTimeMillis
+    val exitCode = (sandboxCommand ++ command) #< stdinStream ! logger
+    val wallTime = System.currentTimeMillis - startTime
 
-      def getOutputFiles(f: File = outputFilesDir): List[File] = {
-        val these = Option(f.listFiles)
-        these.map( f => (f ++ f.filter(_.isDirectory).flatMap(getOutputFiles)).filter(!_.isDirectory).toList ).getOrElse(List())
-      }
+    def getOutputFiles(f: File = outputFilesDir): List[File] = {
+      val these = Option(f.listFiles)
+      these.map(f => (f ++ f.filter(_.isDirectory).flatMap(getOutputFiles)).filter(!_.isDirectory).toList).getOrElse(List())
+    }
 
-      val base64OutputFiles = getOutputFiles().map { file =>
-        file.getPath.replaceAll(s"^${home}/output/", "") -> Base64.encodeBase64String(io.Source.fromFile(file).map(_.toByte).toArray)
-      }.toMap
+    val base64OutputFiles = getOutputFiles().map { file =>
+      file.getPath.replaceAll(s"^${home}/output/", "") -> Base64.encodeBase64String(io.Source.fromFile(file).map(_.toByte).toArray)
+    }.toMap
 
-      SandboxedLanguage.Result(
-        stdout.toString,
-        stderr.toString,
-        wallTime,
-        exitCode,
-        compilationResult,
-        if (base64OutputFiles.isEmpty) None else Some(base64OutputFiles))
+    SandboxedLanguage.Result(
+      stdout.toString,
+      stderr.toString,
+      wallTime,
+      exitCode,
+      compilationResult,
+      if (base64OutputFiles.isEmpty) None else Some(base64OutputFiles))
   }
-
 
   /** Return a [[scala.util.Try[Result]]] after evaluating the code. */
   def evaluate() = {
@@ -110,10 +109,11 @@ trait SandboxedLanguage {
       writeCodeToFile()
 
       evaluation.files match {
-        case Some(files) => files.foreach { case (filename, base64Contents) =>
-          val output = new BufferedOutputStream(new FileOutputStream(new File(s"${home}/${filename}")))
-          output.write(Base64.decodeBase64(base64Contents))
-          output.close()
+        case Some(files) => files.foreach {
+          case (filename, base64Contents) =>
+            val output = new BufferedOutputStream(new FileOutputStream(new File(s"${home}/${filename}")))
+            output.write(Base64.decodeBase64(base64Contents))
+            output.close()
         }
         case _ =>
       }
@@ -147,13 +147,12 @@ trait SandboxedLanguage {
 }
 
 object SandboxedLanguage {
-    /** The result of an evaluation. */
+  /** The result of an evaluation. */
   case class Result(
     stdout: String,
     stderr: String,
     wallTime: Long,
     exitCode: Int,
     compilationResult: Option[Result] = None,
-    outputFiles: Option[Map[String,String]] = None
-  )
+    outputFiles: Option[Map[String, String]] = None)
 }

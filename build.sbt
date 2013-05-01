@@ -1,3 +1,5 @@
+import scalariform.formatter.preferences._
+
 name := "minibcs"
 
 version := "1.0.0"
@@ -29,7 +31,9 @@ site.includeScaladoc()
 
 seq(ScctPlugin.instrumentSettings : _*)
 
-//defaultScalariformSettings
-
-seq(scalariformSettings: _*)
-
+scalariformSettings ++ Seq(
+  ScalariformKeys.preferences := FormattingPreferences().
+  setPreference(PreserveDanglingCloseParenthesis, true).
+  setPreference(MultilineScaladocCommentsStartOnFirstLine, true).
+  setPreference(PlaceScaladocAsterisksBeneathSecondAsterisk, true)
+)
