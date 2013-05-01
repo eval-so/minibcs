@@ -49,7 +49,7 @@
           <div class="superTypes hiddenContent"><span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
         </div><div class="toggleContainer block">
           <span class="toggle">Known Subclasses</span>
-          <div class="subClasses hiddenContent"><a href="languages/C.html" class="extype" name="so.eval.languages.C">C</a>, <a href="languages/C$plus$plus.html" class="extype" name="so.eval.languages.C++">C++</a>, <a href="languages/Python.html" class="extype" name="so.eval.languages.Python">Python</a>, <a href="languages/Ruby.html" class="extype" name="so.eval.languages.Ruby">Ruby</a>, <a href="languages/Scala.html" class="extype" name="so.eval.languages.Scala">Scala</a></div>
+          <div class="subClasses hiddenContent"><a href="languages/C.html" class="extype" name="so.eval.languages.C">C</a>, <a href="languages/C$plus$plus.html" class="extype" name="so.eval.languages.C++">C++</a>, <a href="languages/Clojure.html" class="extype" name="so.eval.languages.Clojure">Clojure</a>, <a href="languages/Go.html" class="extype" name="so.eval.languages.Go">Go</a>, <a href="languages/Io.html" class="extype" name="so.eval.languages.Io">Io</a>, <a href="languages/Java.html" class="extype" name="so.eval.languages.Java">Java</a>, <a href="languages/PHP.html" class="extype" name="so.eval.languages.PHP">PHP</a>, <a href="languages/Perl.html" class="extype" name="so.eval.languages.Perl">Perl</a>, <a href="languages/Python.html" class="extype" name="so.eval.languages.Python">Python</a>, <a href="languages/Ruby.html" class="extype" name="so.eval.languages.Ruby">Ruby</a>, <a href="languages/Scala.html" class="extype" name="so.eval.languages.Scala">Scala</a></div>
         </div></div>
         
 
@@ -242,6 +242,21 @@
       </span>
       </h4>
       <p class="shortcomment cmt">How do we compile the code, if we need to?</p>
+    </li><li name="so.eval.SandboxedLanguage#deleteHomeDirectory" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="deleteHomeDirectory():Unit"></a>
+      <a id="deleteHomeDirectory():Unit"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">deleteHomeDirectory</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Delete the evaluation's home directory.</p><div class="fullcomment"><div class="comment cmt"><p>Delete the evaluation's home directory.</p><p>This is intentionally public so that we can test without evaluating
+and not leave a bunch of eval-* tmpdirs around.
+</p></div></div>
     </li><li name="scala.AnyRef#eq" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="eq(x$1:AnyRef):Boolean"></a>
       <a id="eq(AnyRef):Boolean"></a>
