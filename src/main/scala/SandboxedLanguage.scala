@@ -52,7 +52,7 @@ trait SandboxedLanguage {
   /** How do we sandbox the eval? */
   private val sandboxCommand: Seq[String] = Seq(
     "timeout", timeout.toString, "sandbox", "-H", home.toString, "-T",
-    tmp.toString, "-t", "sandbox_x_t", "timeout", timeout.toString)
+    tmp.toString, "-t", "sandbox_t", "timeout", timeout.toString)
 
   /** Put the given code in its source file. */
   private def writeCodeToFile() {
