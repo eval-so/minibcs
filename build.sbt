@@ -31,7 +31,7 @@ site.includeScaladoc()
 
 seq(ScctPlugin.instrumentSettings : _*)
 
-scalariformSettings ++ Seq(
+defaultScalariformSettings ++ Seq(
   ScalariformKeys.preferences := FormattingPreferences().
   setPreference(PreserveDanglingCloseParenthesis, true).
   setPreference(MultilineScaladocCommentsStartOnFirstLine, true).
