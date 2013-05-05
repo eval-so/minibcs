@@ -45,7 +45,7 @@ class Factor
       inside(result) {
         case Result(stdout, stderr, wallTime, exitCode, compilationResult, outputFiles) =>
           stdout.trim should be("hello world!")
-          wallTime should be < 1000L
+          wallTime should be < 2000L
           exitCode should be(0)
           compilationResult should be(None)
       }
