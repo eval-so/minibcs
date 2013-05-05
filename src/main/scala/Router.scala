@@ -8,6 +8,7 @@ object Router {
   val languages = Map(
     "c" -> C,
     "c++" -> `C++`,
+    "chickenscheme" -> ChickenScheme,
     "clojure" -> Clojure,
     "factor" -> Factor,
     "go" -> Go,
