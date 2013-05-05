@@ -45,6 +45,12 @@ object Router {
     "php" -> "PHP"
   )
 
+  /** Return the proper display name for a language. */
+  def displayName(key: String) = languages.get(key) match {
+    case Some(language) => languageDisplayName.get(key).getOrElse(key.capitalize)
+    case _ => None
+  }
+
   /** LEGACY: Return a subclass of [[SandboxedLanguage]], configured to run an eval. */
   def route(language: String, code: String) = languages.get(language).map(_(EvaluationRequest(code)))
 
