@@ -37,6 +37,7 @@ object Router {
     * any simple way to solve this, but we should try to at some point.
     */
   val languageDisplayName = Map(
+    "chickenscheme" -> "Chicken Scheme",
     "php" -> "PHP"
   )
 
