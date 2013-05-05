@@ -9,6 +9,7 @@ object Router {
     "c" -> C,
     "c++" -> `C++`,
     "clojure" -> Clojure,
+    "factor" -> Factor,
     "go" -> Go,
     "io" -> Io,
     "java" -> Java,
