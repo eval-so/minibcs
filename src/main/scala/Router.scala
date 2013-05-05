@@ -14,6 +14,8 @@ object Router {
     "go" -> Go,
     "io" -> Io,
     "java" -> Java,
+    "jruby18" -> JRuby18,
+    "jruby19" -> JRuby19,
     "perl" -> Perl,
     "php" -> PHP,
     "python" -> Python,
@@ -38,6 +40,8 @@ object Router {
     */
   val languageDisplayName = Map(
     "chickenscheme" -> "Chicken Scheme",
+    "jruby18" -> "JRuby (1.8 mode)",
+    "jruby19" -> "JRuby (1.9 mode)",
     "php" -> "PHP"
   )
 
