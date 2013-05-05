@@ -1,17 +1,17 @@
 package tests
-import so.eval.{EvaluationRequest, Router}
+import so.eval.{ EvaluationRequest, Router }
 import so.eval.SandboxedLanguage.Result
 
-import akka.actor.{ActorSystem, Props}
+import akka.actor.{ ActorSystem, Props }
 import akka.pattern.ask
 import akka.util.Timeout
 
-import org.scalatest.{BeforeAndAfter, FunSpec, Inside, ParallelTestExecution}
+import org.scalatest.{ BeforeAndAfter, FunSpec, Inside, ParallelTestExecution }
 import org.scalatest.matchers.ShouldMatchers
 
 import scala.concurrent.Await
 import scala.concurrent.duration._
-import scala.util.{Failure, Try, Success}
+import scala.util.{ Failure, Try, Success }
 
 class `C`
   extends FunSpec
@@ -42,15 +42,15 @@ class `C`
       val future = router ? evaluation.get
       val futureResult = Await.result(future, timeout.duration).asInstanceOf[Try[Result]]
 
-      futureResult should be ('success)
+      futureResult should be('success)
       val Success(result) = futureResult
 
       inside(result) {
         case Result(stdout, stderr, wallTime, exitCode, compilationResult, outputFiles) =>
-          stdout.trim should be ("hello world!")
-          stderr.trim should be ("hi from stderr")
+          stdout.trim should be("hello world!")
+          stderr.trim should be("hi from stderr")
           wallTime should be < 1000L
-          exitCode should be (0)
+          exitCode should be(0)
           compilationResult should not be (None)
       }
     }
@@ -60,15 +60,15 @@ class `C`
         "c",
         EvaluationRequest(
           code,
-            files = Some(
-              Map(
-                "foo.c" -> "bar",
-                "baz.c" -> "buz"))))
+          files = Some(
+            Map(
+              "foo.c" -> "bar",
+              "baz.c" -> "buz"))))
 
       evaluation should not be (None)
       val compileCommand = evaluation.get.compileCommand.get.mkString(" ")
-      compileCommand should include ("foo.c")
-      compileCommand should include ("baz.c")
+      compileCommand should include("foo.c")
+      compileCommand should include("baz.c")
       evaluation.get.deleteHomeDirectory()
     }
 
@@ -84,16 +84,16 @@ class `C`
       val future = router ? evaluation.get
       val futureResult = Await.result(future, timeout.duration).asInstanceOf[Try[Result]]
 
-      futureResult should be ('success)
+      futureResult should be('success)
       val Success(result) = futureResult
 
       inside(result) {
         case Result(stdout, stderr, wallTime, exitCode, compilationResult, outputFiles) =>
-          stdout.trim should be ("")
-          stderr.trim should be ("")
+          stdout.trim should be("")
+          stderr.trim should be("")
           wallTime should be < 1000L
-          exitCode should be (0)
-          compilationResult should be (None)
+          exitCode should be(0)
+          compilationResult should be(None)
       }
     }
   }

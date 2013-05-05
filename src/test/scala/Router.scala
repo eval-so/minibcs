@@ -1,6 +1,6 @@
 package tests
-import so.eval.{EvaluationRequest, Router}
-import org.scalatest.{BeforeAndAfter, FunSpec, ParallelTestExecution}
+import so.eval.{ EvaluationRequest, Router }
+import org.scalatest.{ BeforeAndAfter, FunSpec, ParallelTestExecution }
 import org.scalatest.matchers.ShouldMatchers
 
 class RouterSpec
@@ -15,7 +15,7 @@ class RouterSpec
       ruby should not be (None)
       ruby.get.deleteHomeDirectory()
 
-      Router.route("foobar", "foo bar") should be (None)
+      Router.route("foobar", "foo bar") should be(None)
     }
 
     it("should be able to route using the new actor-style method") {
@@ -23,11 +23,11 @@ class RouterSpec
       ruby should not be (None)
       ruby.get.deleteHomeDirectory()
 
-      Router.route("foobar", EvaluationRequest("puts 1")) should be (None)
+      Router.route("foobar", EvaluationRequest("puts 1")) should be(None)
     }
 
     it("should be able to give a list evaluatable languages") {
-      Router.languages.keys should contain ("ruby")
+      Router.languages.keys should contain("ruby")
     }
   }
 }

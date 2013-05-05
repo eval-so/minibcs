@@ -1,7 +1,7 @@
 package tests
-import so.eval.{EvaluationRequest, Router}
+import so.eval.{ EvaluationRequest, Router }
 
-import org.scalatest.{BeforeAndAfter, FunSpec, Inside, ParallelTestExecution}
+import org.scalatest.{ BeforeAndAfter, FunSpec, Inside, ParallelTestExecution }
 import org.scalatest.matchers.ShouldMatchers
 
 class Base64
@@ -16,7 +16,7 @@ class Base64
       val res = Router.route(
         "ruby",
         "`echo 'foobar' > output/foo`; puts 123").get.evaluate
-      res.get.outputFiles.get.head._2 should be ("Zm9vYmFyCg==")
+      res.get.outputFiles.get.head._2 should be("Zm9vYmFyCg==")
     }
 
     it("should decode input files correctly") {
@@ -24,7 +24,7 @@ class Base64
         "puts File.read('foo')",
         files = Some(Map("foo" -> "Zm9vYmFyCg==")))
       val res = Router.route("ruby", req).get.evaluate
-      res.get.stdout.trim should be ("foobar")
+      res.get.stdout.trim should be("foobar")
     }
   }
 }
