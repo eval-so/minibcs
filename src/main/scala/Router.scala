@@ -21,6 +21,25 @@ object Router {
     "scala" -> Scala
   )
 
+  /** Hack to give certain languages a different display name.
+    *
+    * I fought for hours trying to work out a better way to do this, but for now
+    * this will band-aid around the issue.
+    *
+    * We basically want displayName to be a static field on an implementation of
+    * [[so.eval.SandboxedLanguage]]...but only some instances of it, which is
+    * our first issue. Our second issue is that even if we defined a companion
+    * object on all implementations, our language map above would break as it
+    * infers [String, Object] instead of the convoluted AbstractFunction1
+    * conjunction it comes up with now.
+    *
+    * Simply put, I've tried a bunch of other options, and couldn't come up with
+    * any simple way to solve this, but we should try to at some point.
+    */
+  val languageDisplayName = Map(
+    "php" -> "PHP"
+  )
+
   /** LEGACY: Return a subclass of [[SandboxedLanguage]], configured to run an eval. */
   def route(language: String, code: String) = languages.get(language).map(_(EvaluationRequest(code)))
 
