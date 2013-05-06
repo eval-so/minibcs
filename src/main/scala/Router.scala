@@ -16,6 +16,7 @@ object Router {
     "java" -> Java,
     "jruby18" -> JRuby18,
     "jruby19" -> JRuby19,
+    "lolcode" -> LOLCODE,
     "perl" -> Perl,
     "php" -> PHP,
     "python" -> Python,
@@ -42,6 +43,7 @@ object Router {
     "chickenscheme" -> "Chicken Scheme",
     "jruby18" -> "JRuby (1.8 mode)",
     "jruby19" -> "JRuby (1.9 mode)",
+    "lolcode" -> "LOLCODE (via lci)",
     "php" -> "PHP"
   )
 
