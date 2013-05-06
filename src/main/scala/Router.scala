@@ -19,7 +19,8 @@ object Router {
     "lolcode" -> LOLCODE,
     "perl" -> Perl,
     "php" -> PHP,
-    "python" -> Python,
+    "python2" -> Python2,
+    "python3" -> Python3,
     "ruby" -> Ruby,
     "scala" -> Scala
   )
@@ -41,6 +42,8 @@ object Router {
     */
   val languageDisplayName = Map(
     "chickenscheme" -> "Chicken Scheme",
+    "python2" -> "Python 2",
+    "python3" -> "Python 3",
     "jruby18" -> "JRuby (1.8 mode)",
     "jruby19" -> "JRuby (1.9 mode)",
     "lolcode" -> "LOLCODE (via lci)",
