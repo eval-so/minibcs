@@ -19,7 +19,6 @@ class LOLCODE extends LanguageTest {
             |VISIBLE "hello world!"
             |KTHXBYE""".stripMargin))
 
-
       evaluation should not be (None)
 
       val future = router ? evaluation.get

@@ -20,14 +20,14 @@ class ChickenScheme extends LanguageTest {
       val future = router ? evaluation.get
       val futureResult = Await.result(future, timeout.duration).asInstanceOf[Try[Result]]
 
-      futureResult should be ('success)
+      futureResult should be('success)
       val Success(result) = futureResult
 
       inside(result) {
         case Result(stdout, stderr, wallTime, exitCode, compilationResult, outputFiles) =>
-          stdout.trim should be ("hello world!")
+          stdout.trim should be("hello world!")
           wallTime should be < 1000L
-          exitCode should be (0)
+          exitCode should be(0)
           compilationResult should not be (None)
       }
     }
