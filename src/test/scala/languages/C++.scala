@@ -33,7 +33,7 @@ class `C++` extends LanguageTest {
         case Result(stdout, stderr, wallTime, exitCode, compilationResult, outputFiles) =>
           stdout.trim should be("hello world!")
           stderr.trim should be("hi from stderr")
-          wallTime should be < 1000L
+          wallTime should be < 2000L
           exitCode should be(0)
           compilationResult should not be (None)
       }
