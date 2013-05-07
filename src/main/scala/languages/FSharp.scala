@@ -6,4 +6,5 @@ case class FSharp(evaluation: EvaluationRequest) extends SandboxedLanguage {
   override lazy val filename = s"program.${extension}"
   override val compileCommand = Some(Seq("fsharpc", "--nologo", "-o", "a.exe", filename))
   val command = Seq("mono", "a.exe")
+  override val timeout = 10
 }
