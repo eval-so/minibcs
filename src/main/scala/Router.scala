@@ -17,6 +17,7 @@ object Router {
     "jruby18" -> JRuby18,
     "jruby19" -> JRuby19,
     "lolcode" -> LOLCODE,
+    "lua" -> Lua,
     "perl" -> Perl,
     "php" -> PHP,
     "python2" -> Python2,
