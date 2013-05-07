@@ -23,7 +23,8 @@ object Router {
     "python2" -> Python2,
     "python3" -> Python3,
     "ruby" -> Ruby,
-    "scala" -> Scala
+    "scala" -> Scala,
+    "sml-mlton" -> SML
   )
 
   /** Hack to give certain languages a different display name.
@@ -48,7 +49,8 @@ object Router {
     "jruby18" -> "JRuby (1.8 mode)",
     "jruby19" -> "JRuby (1.9 mode)",
     "lolcode" -> "LOLCODE (via lci)",
-    "php" -> "PHP"
+    "php" -> "PHP",
+    "sml-mlton" -> "SML (MLton)"
   )
 
   /** Return the proper display name for a language. */
