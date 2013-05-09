@@ -57,7 +57,7 @@ object Router {
 
   /** Return the proper display name for a language. */
   def displayName(key: String) = languages.get(key) match {
-    case Some(language) => languageDisplayName.get(key).getOrElse(key.capitalize)
+    case Some(language) => Some(languageDisplayName.get(key).getOrElse(key.capitalize))
     case _ => None
   }
 
