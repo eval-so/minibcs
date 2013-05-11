@@ -15,6 +15,7 @@ object Router {
     "factor" -> Factor,
     "fsharp" -> FSharp,
     "go" -> Go,
+    "haskell" -> Haskell,
     "io" -> Io,
     "java" -> Java,
     "jruby18" -> JRuby18,
