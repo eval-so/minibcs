@@ -6,6 +6,7 @@ import akka.actor.Actor
 object Router {
   /* The list of languages we can evaluate. Keep alphabetical. */
   val languages = Map(
+    "bash" -> Bash,
     "c" -> C,
     "c++" -> `C++`,
     "chickenscheme" -> ChickenScheme,
