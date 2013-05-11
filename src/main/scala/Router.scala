@@ -27,6 +27,7 @@ object Router {
     "python3" -> Python3,
     "ruby" -> Ruby,
     "scala" -> Scala,
+    "smalltalk" -> Smalltalk,
     "sml-mlton" -> SML
   )
 
