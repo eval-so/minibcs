@@ -11,6 +11,7 @@ object Router {
     "c++" -> `C++`,
     "chickenscheme" -> ChickenScheme,
     "clojure" -> Clojure,
+    "csharp" -> CSharp,
     "factor" -> Factor,
     "fsharp" -> FSharp,
     "go" -> Go,
@@ -46,6 +47,7 @@ object Router {
     */
   val languageDisplayName = Map(
     "chickenscheme" -> "Chicken Scheme",
+    "csharp" -> "C#",
     "fsharp" -> "F#",
     "python2" -> "Python 2",
     "python3" -> "Python 3",
