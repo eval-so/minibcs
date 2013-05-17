@@ -26,7 +26,7 @@ class Clojure extends LanguageTest {
       inside(result) {
         case Result(stdout, stderr, wallTime, exitCode, compilationResult, outputFiles) =>
           stdout.trim should be("hello world!")
-          wallTime should be < 7000L
+          wallTime should be < 10000L
           exitCode should be(0)
           compilationResult should be(None)
       }
