@@ -29,7 +29,8 @@ object Router {
     "ruby" -> Ruby,
     "scala" -> Scala,
     "smalltalk" -> Smalltalk,
-    "sml-mlton" -> SML
+    "sml-mlton" -> SML,
+    "vbnet" -> VBNET
   )
 
   /** Hack to give certain languages a different display name.
@@ -57,7 +58,8 @@ object Router {
     "jruby19" -> "JRuby (1.9 mode)",
     "lolcode" -> "LOLCODE (via lci)",
     "php" -> "PHP",
-    "sml-mlton" -> "SML (MLton)"
+    "sml-mlton" -> "SML (MLton)",
+    "vbnet" -> "VB.NET"
   )
 
   /** Return the proper display name for a language. */
