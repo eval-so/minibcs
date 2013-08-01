@@ -27,6 +27,7 @@ object Router {
     "python2" -> Python2,
     "python3" -> Python3,
     "ruby" -> Ruby,
+    "rust" -> Rust,
     "scala" -> Scala,
     "smalltalk" -> Smalltalk,
     "sml-mlton" -> SML,
@@ -58,6 +59,7 @@ object Router {
     "jruby19" -> "JRuby (1.9 mode)",
     "lolcode" -> "LOLCODE (via lci)",
     "php" -> "PHP",
+    "rust" -> "Rust 0.7",
     "sml-mlton" -> "SML (MLton)",
     "vbnet" -> "VB.NET"
   )
