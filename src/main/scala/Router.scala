@@ -12,6 +12,7 @@ object Router {
     "chickenscheme" -> ChickenScheme,
     "clojure" -> Clojure,
     "csharp" -> CSharp,
+    "elixir" -> Elixir,
     "factor" -> Factor,
     "fsharp" -> FSharp,
     "go" -> Go,
