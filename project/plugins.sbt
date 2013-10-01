@@ -1,12 +1,11 @@
 resolvers += Classpaths.typesafeResolver
 
 resolvers ++= Seq(
-    "scct-github-repository" at "http://mtkopone.github.com/scct/maven-repo",
     "sonatype-oss-repo" at "https://oss.sonatype.org/content/groups/public/",
     "jgit-repo" at "http://download.eclipse.org/jgit/maven"
 )
 
-addSbtPlugin("reaktor" % "sbt-scct" % "0.2-SNAPSHOT")
+addSbtPlugin("com.github.scct" % "sbt-scct" % "0.2")
 
 addSbtPlugin("com.typesafe.sbt" % "sbt-ghpages" % "0.5.0")
 
