@@ -29,7 +29,7 @@ git.remoteRepo := "git@github.com:eval-so/minibcs.git"
 
 site.includeScaladoc()
 
-seq(ScctPlugin.instrumentSettings : _*)
+seq(sbt.scct.ScctPlugin.instrumentSettings : _*)
 
 defaultScalariformSettings ++ Seq(
   ScalariformKeys.preferences := FormattingPreferences().
